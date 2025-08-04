@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfectly Centered Service Circle</title>
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Circular Service Container */
+        .services-section {
+            padding: 40px 20px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .what-we-do-heading {
+            margin-bottom: 40px;
+            width: 100%;
+        }
+        
+        .what-we-do-heading h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+        
+        .services-circle-wrapper {
+            position: relative;
+            width: 90vw;
+            max-width: 800px;
+            height: 90vw;
+            max-height: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Center circle - now perfectly centered */
+        .services-center {
+            position: absolute;
+            width: 20%;
+            height: 20%;
+            min-width: 80px;
+            min-height: 80px;
+            background: #1e3a8a;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: clamp(12px, 1.8vw, 18px);
+            box-shadow: 0 0 0 10px rgba(30, 58, 138, 0.2);
+            z-index: 0;
+            text-align: center;
+            padding: 10px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .service-category {
+            position: absolute;
+            width: 25%;
+            height: 25%;
+            min-width: 100px;
+            min-height: 100px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            z-index: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            will-change: transform;
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border: 1px solid #e0e7ff;
+        }
+
+        .service-category:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            background: linear-gradient(145deg, #ffffff 0%, #e0e7ff 100%);
+        }
+
+        .service-category h3 {
+            margin: 0;
+            font-size: clamp(12px, 2vw, 16px);
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .service-category ul {
+            display: none;
+            list-style: none;
+            padding: 0;
+            margin-top: 8px;
+            font-size: clamp(10px, 1.6vw, 14px);
+            color: #333;
+        }
+
+        .service-category:hover ul {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <section id="services" class="services-section">
+        <div class="what-we-do-heading">
+            <h2>What We Do</h2>
+        </div>
+        <div class="services-circle-wrapper">
+            <!-- Perfectly centered element -->
+            <div class="services-center">Our Services</div>
+            
+            <!-- Service cards will be positioned by JavaScript -->
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const wrapper = document.querySelector('.services-circle-wrapper');
+            const centerElement = document.querySelector('.services-center');
+            
+            // Create service categories
+            const services = [
+                {
+                    title: "🔥 Brand Strategy",
+                    items: ["Brand Positioning", "Messaging", "Audience Research"]
+                },
+                {
+                    title: "🎨 Creative & Design",
+                    items: ["Visual Identity", "Logo Design", "Packaging"]
+                },
+                {
+                    title: "📲 Digital Marketing",
+                    items: ["Social Media", "SEO & SEM", "Email Marketing"]
+                },
+                {
+                    title: "💻 Web & Tech",
+                    items: ["Web Development", "E-commerce", "Landing Pages"]
+                },
+                {
+                    title: "📈 Performance",
+                    items: ["Paid Ads", "Analytics", "Retargeting"]
+                }
+            ];
+            
+            // Create service elements
+            services.forEach((service, index) => {
+                const serviceElement = document.createElement('div');
+                serviceElement.className = 'service-category';
+                serviceElement.innerHTML = `
+                    <h3>${service.title}</h3>
+                    <ul>
+                        ${service.items.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                `;
+                wrapper.appendChild(serviceElement);
+            });
+            
+            const serviceElements = document.querySelectorAll('.service-category');
+            
+            function positionServices() {
+                const wrapperWidth = wrapper.offsetWidth;
+                const wrapperHeight = wrapper.offsetHeight;
+                const center = {
+                    x: wrapperWidth / 2,
+                    y: wrapperHeight / 2
+                };
+                
+                // Position center element (redundant but ensures perfect centering)
+                centerElement.style.left = '50%';
+                centerElement.style.top = '50%';
+                centerElement.style.transform = 'translate(-50%, -50%)';
+                
+                // Adjust radius based on container size
+                const radius = Math.min(wrapperWidth, wrapperHeight) * 0.35;
+                
+                serviceElements.forEach((service, index) => {
+                    const angle = (index * (2 * Math.PI / serviceElements.length)) - Math.PI/2;
+                    const x = center.x + radius * Math.cos(angle) - service.offsetWidth/2;
+                    const y = center.y + radius * Math.sin(angle) - service.offsetHeight/2;
+                    
+                    service.style.left = `${x}px`;
+                    service.style.top = `${y}px`;
+                    
+                    // Store original position and side (left/right)
+                    service.dataset.originalX = x;
+                    service.dataset.originalY = y;
+                    service.dataset.side = x < center.x ? 'left' : 'right';
+                });
+            }
+            
+            // Initial positioning
+            positionServices();
+            
+            // Re-position on window resize with debounce
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(positionServices, 100);
+            });
+            
+            // Adjust hover movement based on screen size
+            function getMoveDistance() {
+                const width = window.innerWidth;
+                if (width < 480) return width * 0.03;
+                if (width < 768) return width * 0.025;
+                if (width < 1200) return width * 0.02;
+                return width * 0.015;
+            }
+            
+            // Hover effect
+            serviceElements.forEach(service => {
+                service.addEventListener('mouseenter', () => {
+                    const moveDistance = getMoveDistance();
+                    const moveDirection = service.dataset.side === 'left' ? -1 : 1;
+                    service.style.transform = `translateX(${moveDistance * moveDirection}px) scale(1.1)`;
+                });
+                
+                service.addEventListener('mouseleave', () => {
+                    service.style.transform = 'translateX(0) scale(1)';
+                });
+                
+                // Touch support
+                service.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    const moveDistance = getMoveDistance();
+                    const moveDirection = service.dataset.side === 'left' ? -1 : 1;
+                    service.style.transform = `translateX(${moveDistance * moveDirection}px) scale(1.1)`;
+                });
+                
+                service.addEventListener('touchend', () => {
+                    service.style.transform = 'translateX(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
