@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Brand Marketers, a digital marketing agency specializing in hoarding, bus shelter, vehicle branding, and more.">
+    <meta name="keywords" content="digital marketing, advertising, hoarding, bus shelter, vehicle branding, sign board">
+    <title>Brand Marketers - Digital Marketing & Advertising Agency</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f2f5 0%, #e0e7ff 100%);
+            background-size: cover;
+            background-attachment: scroll;
+            overflow-x: hidden;
+        }
+        :root {
+            --primary-color: #1e3a8a;
+            --accent-color: #e76f51;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --border-radius: 15px;
+        }
+        .header {
+            background: linear-gradient(90deg, #1e3a8a 0%, #4b6cb7 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.1);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .nav-links a {
+            color: #1e3a8a;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: #e76f51;
+        }
+        .nav-links.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            right: 20px;
+            background: rgba(30, 58, 138, 0.95);
+            border-radius: 10px;
+            padding: 15px;
+            z-index: 9;
+        }
+        .nav-links.active a {
+            margin: 10px 0;
+            color: #fff;
+            font-size: 18px;
+        }
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #fff;
+            padding: 10px;
+            transition: transform 0.3s ease;
+        }
+        .hamburger:hover {
+            transform: rotate(90deg);
+        }
+        .banner {
+            background: #1e3a8a url('bg.png') no-repeat center/cover;
+            color: #fff;
+            text-align: center;
+            padding: 0;
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: 1;
+        }
+        .banner > * {
+            position: relative;
+            z-index: 2;
+        }
+        .banner h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        .banner.in-view h1 {
+            animation: slideFromBottom 0.8s ease-out forwards;
+        }
+        .banner .image-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .banner img {
+            margin: 10px;
+            border: 4px dashed rgba(4, 52, 114, 0.3);
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            max-width: 200px;
+            height: auto;
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        .banner.in-view img:nth-child(1) {
+            animation: slideFromLeft 0.8s ease-out 0.2s forwards;
+        }
+        .banner.in-view img:nth-child(2) {
+            animation: slideFromTop 0.8s ease-out 0.4s forwards;
+        }
+        .banner.in-view img:nth-child(3) {
+            animation: slideFromRight 0.8s ease-out 0.6s forwards;
+        }
+        .services {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 15px;
+        }
+        .service {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            width: 150px;
+            margin: 10px;
+            text-align: center;
+            padding: 15px;
+            box-sizing: border-box;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateX(0) translateY(0);
+        }
+        .services.in-view .service:nth-child(1) {
+            animation: slideFromLeft 0.8s ease-out 0.2s forwards;
+        }
+        .services.in-view .service:nth-child(2) {
+            animation: slideFromLeft 0.8s ease-out 0.4s forwards;
+        }
+        .services.in-view .service:nth-child(3) {
+            animation: slideFromBottom 0.8s ease-out 0.6s forwards;
+        }
+        .services.in-view .service:nth-child(4) {
+            animation: slideFromRight 0.8s ease-out 0.8s forwards;
+        }
+        .services.in-view .service:nth-child(5) {
+            animation: slideFromRight 0.8s ease-out 1.0s forwards;
+        }
+        .service:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service img {
+            width: 50px;
+        }
+        .service h3 {
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+        .who-we-are {
+            text-align: center;
+            padding: 30px 15px;
+            color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius);
+            margin: 20px auto;
+            max-width: 1200px;
+            box-shadow: var(--shadow);
+        }
+        .who-we-are h2, .who-we-are p {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        .who-we-are.in-view h2 {
+            animation: slideFromBottom 0.8s ease-out 0.2s forwards;
+        }
+        .who-we-are.in-view p {
+            animation: slideFromBottom 0.8s ease-out 0.4s forwards;
+        }
+        .about {
+            text-align: center;
+            padding: 30px 15px;
+            color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius);
+            margin: 20px auto;
+            max-width: 1200px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        .about.in-view {
+            opacity: 1;
+            transform: translateY(0);
+            animation: slideFromBottom 0.8s ease-out forwards;
+        }
+        .about h2, .about p:not(.no-animate) {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        .about.in-view h2, .about.in-view p:not(.no-animate) {
+            animation: slideFromLeft 0.8s ease-out forwards;
+        }
+        .about h2:nth-child(1) { animation-delay: 0.2s; }
+        .about p:nth-child(2) { animation-delay: 0.4s; }
+        .about p:nth-child(3) { animation-delay: 0.6s; }
+        .about h3:nth-child(4) { animation-delay: 0.8s; }
+        .about ul li {
+            font-size: 1rem;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        .about.in-view ul li:nth-child(1) { animation: slideFromRight 0.8s ease-out 0.2s forwards; }
+        .about.in-view ul li:nth-child(2) { animation: slideFromRight 0.8s ease-out 0.4s forwards; }
+        .about.in-view ul li:nth-child(3) { animation: slideFromRight 0.8s ease-out 0.6s forwards; }
+        .about.in-view ul li:nth-child(4) { animation: slideFromRight 0.8s ease-out 0.8s forwards; }
+        .about.in-view ul li:nth-child(5) { animation: slideFromRight 0.8s ease-out 1.0s forwards; }
+        .about ul li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .what-we-are {
+            text-align: center;
+            padding: 30px 15px;
+            color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius);
+            margin: 20px auto;
+            max-width: 1200px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        .what-we-are.in-view {
+            opacity: 1;
+            transform: translateY(0);
+            animation: slideFromBottom 0.8s ease-out forwards;
+        }
+        .what-we-are h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .what-we-are .dynamic-text {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        .what-we-are .dynamic-text span.static {
+            color: var(--primary-color);
+        }
+        .what-we-are .dynamic-text span.dynamic {
+            color: #ff6200;
+        }
+        .what-we-do-heading {
+            text-align: center;
+            color: var(--primary-color);
+            padding: 20px 15px;
+            margin: 20px auto;
+            max-width: 1200px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        .what-we-do-heading.in-view {
+            opacity: 1;
+            transform: translateY(0);
+            animation: slideFromBottom 0.8s ease-out forwards;
+        }
+        .what-we-do-heading h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .new-what-we-do {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 30px 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        .new-what-we-do.in-view {
+            opacity: 1;
+            transform: translateY(0);
+            animation: slideFromBottom 0.8s ease-out forwards;
+        }
+        .service-category {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            width: 250px;
+            margin: 15px;
+            padding: 20px;
+            text-align: left;
+            box-sizing: border-box;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        .new-what-we-do.in-view .service-category:nth-child(1) {
+            animation: slideFromRight 0.8s ease-out 0.2s forwards;
+        }
+        .new-what-we-do.in-view .service-category:nth-child(2) {
+            animation: slideFromRight 0.8s ease-out 0.4s forwards;
+        }
+        .new-what-we-do.in-view .service-category:nth-child(3) {
+            animation: slideFromRight 0.8s ease-out 0.6s forwards;
+        }
+        .new-what-we-do.in-view .service-category:nth-child(4) {
+            animation: slideFromRight 0.8s ease-out 0.8s forwards;
+        }
+        .new-what-we-do.in-view .service-category:nth-child(5) {
+            animation: slideFromRight 0.8s ease-out 1.0s forwards;
+        }
+        .new-what-we-do .service-category ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .new-what-we-do .service-category ul li {
+            font-size: 1rem;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        .new-what-we-do.in-view .service-category ul li:nth-child(1) {
+            animation: slideFromRight 2.3s ease-out 0.2s forwards;
+        }
+        .new-what-we-do.in-view .service-category ul li:nth-child(2) {
+            animation: slideFromRight 2.3s ease-out 0.4s forwards;
+        }
+        .new-what-we-do.in-view .service-category ul li:nth-child(3) {
+            animation: slideFromRight 2.3s ease-out 0.6s forwards;
+        }
+        .new-what-we-do.in-view .service-category ul li:nth-child(4) {
+            animation: slideFromRight 2.3s ease-out 0.8s forwards;
+        }
+        .new-what-we-do .service-category ul li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-category h3 {
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .service-category ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .success-stories {
+            text-align: center;
+            padding: 30px 15px;
+            color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius);
+            margin: 20px auto;
+            max-width: 1200px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        .success-stories.in-view {
+            opacity: 1;
+            transform: translateY(0);
+            animation: slideFromBottom 0.8s ease-out forwards;
+        }
+        .success-stories h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        .success-stories.in-view h2 {
+            animation: slideFromBottom 0.8s ease-out 0.2s forwards;
+        }
+        .case-study, .testimonials {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .case-study-card, .testimonial-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            width: 350px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateX(100%);
+            text-align: left;
+        }
+        .success-stories.in-view .case-study-card:nth-child(1) {
+            animation: slideFromRight 0.8s ease-out 0.4s forwards;
+        }
+        .success-stories.in-view .testimonial-card:nth-child(1) {
+            animation: slideFromLeft 0.8s ease-out 0.6s forwards;
+        }
+        .success-stories.in-view .testimonial-card:nth-child(2) {
+            animation: slideFromLeft 0.8s ease-out 0.8s forwards;
+        }
+        .case-study-card:hover, .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .case-study-card h3, .testimonial-card h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .case-study-card p, .testimonial-card blockquote {
+            font-size: 1rem;
+            color: #333;
+            margin: 10px 0;
+        }
+        .case-study-card strong {
+            color: var(--primary-color);
+        }
+        .testimonial-card blockquote {
+            font-style: italic;
+            position: relative;
+            padding-left: 20px;
+            border-left: 4px solid var(--accent-color);
+        }
+        .testimonial-card cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-style: normal;
+        }
+        .logo-slider {
+            padding: 20px 15px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius);
+            margin: 20px auto;
+            max-width: 1200px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        .logo-slider.in-view {
+            opacity: 1;
+            transform: translateY(0);
+            animation: slideFromBottom 0.8s ease-out forwards;
+        }
+        .logo-slider h2 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        .logo-slider.in-view h2 {
+            animation: slideFromBottom 0.8s ease-out 0.2s forwards;
+        }
+        .logo-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 90s linear infinite;
+        }
+        .logo-track:hover {
+            animation-play-state: paused;
+        }
+        .logo-track img {
+            height: 80px;
+            width: auto;
+            margin: 0 30px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        .logo-track img:hover {
+            opacity: 1;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        footer {
+            background: linear-gradient(90deg, #1e3a8a 0%, #4b6cb7 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .call-to-action {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .cta-text {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        footer.in-view .cta-text {
+            animation: slideFromRight 0.8s ease-out forwards;
+        }
+        .cta-us {
+            color: var(--accent-color);
+            text-decoration: underline;
+            cursor: pointer;
+            position: relative;
+        }
+        .cta-us::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-color);
+        }
+        .cta-us:hover {
+            color: #ff9f43;
+        }
+        .contact-form {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e3a8a 0%, #4b6cb7 100%);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 50px;
+            box-sizing: border-box;
+            z-index: 1000;
+            opacity: 0;
+            transform: scale(0);
+        }
+        .contact-form.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fullScreenBlast 0.6s ease-out forwards;
+        }
+        .contact-form.active::before,
+        .contact-form.active::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: blastParticles 0.6s ease-out forwards;
+        }
+        .contact-form.active::before {
+            top: 10%;
+            left: 10%;
+        }
+        .contact-form.active::after {
+            bottom: 10%;
+            right: 10%;
+        }
+        .contact-form .form-wrapper {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        .contact-form.active .form-wrapper {
+            animation: formPop 0.5s ease-out 0.3s forwards;
+        }
+        .contact-form label {
+            display: block;
+            font-size: 1rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .contact-form.active input:nth-child(2),
+        .contact-form.active textarea:nth-child(4),
+        .contact-form.active input:nth-child(6),
+        .contact-form.active button:nth-child(7),
+        .contact-form.active button:nth-child(8) {
+            opacity: 1;
+            transform: translateY(0);
+            animation: fieldPop 0.4s ease-out forwards;
+        }
+        .contact-form.active input:nth-child(2) { animation-delay: 0.4s; }
+        .contact-form.active textarea:nth-child(4) { animation-delay: 0.5s; }
+        .contact-form.active input:nth-child(6) { animation-delay: 0.6s; }
+        .contact-form.active button:nth-child(7) { animation-delay: 0.7s; }
+        .contact-form.active button:nth-child(8) { animation-delay: 0.8s; }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(231, 111, 81, 0.5);
+            outline: none;
+        }
+        .contact-form button {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .contact-form button:hover {
+            background: #4b6cb7;
+            transform: scale(1.05);
+        }
+        .contact-form .close-form {
+            background: var(--accent-color);
+            margin-left: 10px;
+        }
+        .contact-form .close-form:hover {
+            background: #ff9f43;
+            transform: scale(1.05);
+        }
+        .fire-cursor {
+            display: none;
+        }
+        .trail-particle {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(0, 20, 60, 0.9) 20%, rgba(65, 105, 225, 0.7) 50%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: trailFade 1s ease-out forwards, trailGlow 0.5s ease-in-out infinite alternate;
+            will-change: transform, opacity, box-shadow;
+        }
+        @keyframes trailFade {
+            0% { opacity: 0.9; transform: scale(1) translateY(0) translateX(0); }
+            50% { transform: scale(0.65) translateY(-15px) translateX(5px); }
+            100% { opacity: 0; transform: scale(0.3) translateY(-30px) translateX(-5px); }
+        }
+        @keyframes trailGlow {
+            0% { box-shadow: 0 0 8px rgba(65, 105, 225, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(135, 206, 250, 0.9); }
+        }
+        @keyframes slideFromLeft {
+            0% { opacity: 0; transform: translateX(-100%); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideFromTop {
+            0% { opacity: 0; transform: translateY(-100%); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideFromRight {
+            0% { opacity: 0; transform: translateX(100%); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideFromBottom {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fullScreenBlast {
+            0% { opacity: 0; transform: scale(0); }
+            40% { opacity: 0.7; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes blastParticles {
+            0% { opacity: 1; transform: translate(0, 0) scale(0); }
+            100% { opacity: 0; transform: translate(80px, -80px) scale(2); }
+        }
+        @keyframes formPop {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fieldPop {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @media screen and (min-width: 2560px) {
+            .logo { width: 200px; }
+            .banner { height: 80vh; }
+            .banner h1 { font-size: 4.5rem; }
+            .banner img { max-width: 250px; }
+            .banner .image-container { gap: 40px; margin-top: 40px; }
+            .service { width: 200px; padding: 20px; }
+            .service img { width: 70px; }
+            .service h3 { font-size: 18px; }
+            .who-we-are h2 { font-size: 2.5rem; }
+            .who-we-are p { font-size: 1.2rem; }
+            .about h2 { font-size: 2.5rem; }
+            .about p, .about ul li { font-size: 1.2rem; }
+            .service-category { width: 300px; padding: 25px; }
+            .service-category h3 { font-size: 22px; }
+            .new-what-we-do .service-category ul li { font-size: 1.2rem; }
+            .what-we-do-heading h2 { font-size: 2.5rem; }
+            .success-stories h2 { font-size: 2.5rem; }
+            .case-study-card, .testimonial-card { width: 400px; padding: 25px; }
+            .case-study-card h3, .testimonial-card h3 { font-size: 1.8rem; }
+            .case-study-card p, .testimonial-card blockquote { font-size: 1.2rem; }
+            .cta-text { font-size: 2.5rem; }
+            .contact-form .form-wrapper { width: 500px; }
+            .contact-form input, .contact-form textarea { font-size: 18px; }
+            .contact-form button { font-size: 18px; }
+            .what-we-are .dynamic-text { font-size: 2.5rem; }
+            .logo-track img { height: 120px; }
+            .trail-particle { width: 30px; height: 30px; }
+        }
+        @media screen and (max-width: 1280px) {
+            .logo { width: 140px; }
+            .banner { height: 75vh; }
+            .banner h1 { font-size: 3rem; }
+            .banner img { max-width: 180px; }
+            .banner .image-container { gap: 25px; margin-top: 25px; }
+            .service { width: 140px; padding: 12px; }
+            .service img { width: 45px; }
+            .service-category { width: 220px; padding: 15px; }
+            .service-category h3 { font-size: 18px; }
+            .what-we-do-heading h2 { font-size: 1.8rem; }
+            .success-stories h2 { font-size: 1.8rem; }
+            .case-study-card, .testimonial-card { width: 300px; padding: 15px; }
+            .cta-text { font-size: 1.8rem; }
+            .contact-form .form-wrapper { width: 350px; }
+            .what-we-are .dynamic-text { font-size: 1.8rem; }
+            .logo-track img { height: 70px; }
+            .trail-particle { width: 18px; height: 18px; }
+        }
+        @media screen and (max-width: 1024px) {
+            .logo { width: 130px; }
+            .banner { height: 70vh; }
+            .banner h1 { font-size: 2.8rem; }
+            .banner img { max-width: 160px; }
+            .banner .image-container { gap: 20px; margin-top: 20px; }
+            .service { width: 120px; padding: 10px; }
+            .service img { width: 40px; }
+            .service-category { width: 200px; padding: 12px; }
+            .service-category h3 { font-size: 16px; }
+            .what-we-do-heading h2 { font-size: 1.6rem; }
+            .success-stories h2 { font-size: 1.6rem; }
+            .case-study-card, .testimonial-card { width: 280px; padding: 12px; }
+            .cta-text { font-size: 1.6rem; }
+            .contact-form .form-wrapper { width: 300px; }
+            .what-we-are .dynamic-text { font-size: 1.6rem; }
+            .logo-track img { height: 60px; }
+            .trail-particle { width: 16px; height: 16px; }
+        }
+        @media screen and (max-width: 786px) {
+            .header { padding: 12px 15px; }
+            .logo { width: 120px; }
+            .hamburger { display: block; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                background: rgba(30, 58, 138, 0.95);
+                border-top: 1px solid #ddd;
+                padding: 10px 0;
+                z-index: 9;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+            .nav-links.active { display: flex; }
+            .nav-links a { margin: 8px 0; font-size: 14px; }
+            .banner { height: 70vh; }
+            .banner h1 { font-size: 2.2rem; }
+            .banner .image-container { gap: 15px; margin-top: 15px; }
+            .banner img { max-width: 100px; padding: 5px; }
+            .service { width: 100px; padding: 8px; margin: 5px; }
+            .service img { width: 35px; }
+            .service h3 { font-size: 14px; }
+            .who-we-are { padding: 10px; }
+            .who-we-are h2 { font-size: 20px; }
+            .who-we-are p { font-size: 14px; }
+            .about { padding: 10px; }
+            .about h2 { font-size: 20px; }
+            .about p, .about ul li { font-size: 14px; }
+            .service-category { width: 100%; margin: 10px 0; padding: 10px; }
+            .service-category h3 { font-size: 16px; }
+            .new-what-we-do .service-category ul li { font-size: 14px; }
+            .what-we-do-heading h2 { font-size: 1.4rem; }
+            .success-stories h2 { font-size: 1.4rem; }
+            .case-study-card, .testimonial-card { width: 100%; margin: 10px 0; }
+            .cta-text { font-size: 1.4rem; }
+            .contact-form .form-wrapper { width: 90%; }
+            .contact-form input, .contact-form textarea { font-size: 14px; }
+            .contact-form button { font-size: 14px; }
+            .what-we-are .dynamic-text { font-size: 1.4rem; }
+            .logo-track img { height: 50px; }
+            .trail-particle { width: 14px; height: 14px; }
+        }
+        @media screen and (max-width: 400px) {
+            .header { padding: 10px 12px; }
+            .logo { width: 100px; }
+            .nav-links a { margin: 5px 0; font-size: 12px; }
+            .banner { height: 60vh; }
+            .banner h1 { font-size: 1.8rem; }
+            .banner .image-container { gap: 10px; margin-top: 10px; }
+            .banner img { max-width: 80px; padding: 3px; }
+            .service { width: 80px; padding: 6px; margin: 3px; }
+            .service img { width: 25px; }
+            .service h3 { font-size: 12px; }
+            .who-we-are { padding: 5px; }
+            .who-we-are h2 { font-size: 16px; }
+            .who-we-are p { font-size: 12px; }
+            .about { padding: 5px; }
+            .about h2 { font-size: 16px; }
+            .about p, .about ul li { font-size: 12px; }
+            .service-category { width: 100%; margin: 5px 0; padding: 8px; }
+            .service-category h3 { font-size: 14px; }
+            .new-what-we-do .service-category ul li { font-size: 12px; }
+            .what-we-do-heading h2 { font-size: 1.2rem; }
+            .success-stories h2 { font-size: 1.2rem; }
+            .case-study-card, .testimonial-card { width: 100%; padding: 10px; }
+            .cta-text { font-size: 1.2rem; }
+            .contact-form .form-wrapper { width: 90%; }
+            .contact-form input, .contact-form textarea { font-size: 12px; }
+            .contact-form button { font-size: 12px; }
+            .what-we-are .dynamic-text { font-size: 1.2rem; }
+            .logo-track img { height: 40px; }
+            .trail-particle { width: 12px; height: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img class="logo" src="logonew.png" alt="Brand Marketers Logo" loading="lazy">
+        <div class="hamburger" aria-label="Toggle navigation" role="button" tabindex="0" aria-expanded="false">☰</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#what-we-do">What We Do</a>
+            <a href="#works">Works</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+    <div class="banner">
+        <h1>Digital Marketing Agency</h1>
+        <div class="image-container">
+            <img src="img1.jpg" alt="Hoarding advertisement for client campaign" loading="lazy" width="200" height="150">
+            <img src="img2.jpg" alt="Bus shelter advertisement for client campaign" loading="lazy" width="200" height="150">
+            <img src="img3.jpg" alt="Vehicle branding advertisement for client campaign" loading="lazy" width="200" height="150">
+        </div>
+    </div>
+    <div class="services">
+        <div class="service">
+            <img src="hording.jpg" alt="Hoarding Advertisement" loading="lazy">
+            <h3>Hoarding</h3>
+        </div>
+        <div class="service">
+            <img src="busshelter.jpg" alt="Bus Shelter Advertisement" loading="lazy">
+            <h3>Bus Shelter</h3>
+        </div>
+        <div class="service">
+            <img src="vehiclebranding.jpg" alt="Vehicle Branding Advertisement" loading="lazy">
+            <h3>Vehicle Branding</h3>
+        </div>
+        <div class="service">
+            <img src="https://via.placeholder.com/50" alt="Bus Back Advertisement" loading="lazy">
+            <h3>Bus Back Advertisements</h3>
+        </div>
+        <div class="service">
+            <img src="signboard.jpg" alt="Sign Board Advertisement" loading="lazy">
+            <h3>Sign Board</h3>
+        </div>
+    </div>
+    <div class="who-we-are">
+        <h2>Who We Are?</h2>
+        <p>We are a passionate team of digital marketers dedicated to elevating your brand through innovative advertising solutions.</p>
+    </div>
+    <section id="about" class="about">
+        <h2>Your Growth Is Our Mission</h2>
+        <p>The Brand Marketers isn’t just a marketing agency — we’re your growth partners. With over 10 years of combined experience, our team of strategists, creatives, and digital experts bring passion, precision, and purpose to everything we do.</p>
+        <p>We exist to help ambitious brands find their voice, tell their story, and dominate their market.</p>
+        <h3>Why Choose Us:</h3>
+        <ul>
+            <li><span>💡</span> Strategy-First Approach</li>
+            <li><span>🎯</span> Performance-Driven Campaigns</li>
+            <li><span>🛠</span> Full-Spectrum Services</li>
+            <li><span>🤝</span> Collaborative Partnerships</li>
+            <li><span>📈</span> Results You Can Measure</li>
+        </ul>
+    </section>
+    <section class="what-we-are">
+        <h2>What We Are</h2>
+        <div class="dynamic-text"><span class="static">We are</span> <span class="dynamic">makers</span>.</div>
+        <p>We craft innovative solutions to amplify your brand's presence across digital and traditional platforms.</p>
+    </section>
+    <div class="what-we-do-heading" id="what-we-do">
+        <h2>What We Do</h2>
+    </div>
+    <div id="new-what-we-do" class="new-what-we-do">
+        <div class="service-category">
+            <h3><span>🔥</span> Brand Strategy</h3>
+            <ul>
+                <li>Brand Positioning</li>
+                <li>Messaging & Tone of Voice</li>
+                <li>Audience Research</li>
+                <li>Competitive Analysis</li>
+            </ul>
+        </div>
+        <div class="service-category">
+            <h3><span>🎨</span> Creative & Design</h3>
+            <ul>
+                <li>Visual Identity</li>
+                <li>Logo Design</li>
+                <li>Packaging</li>
+                <li>Marketing Collateral</li>
+            </ul>
+        </div>
+        <div class="service-category">
+            <h3><span>📲</span> Digital Marketing</h3>
+            <ul>
+                <li>Social Media Strategy & Management</li>
+                <li>SEO & SEM</li>
+                <li>Email Marketing</li>
+                <li>Influencer Campaigns</li>
+            </ul>
+        </div>
+        <div class="service-category">
+            <h3><span>💻</span> Web & Tech</h3>
+            <ul>
+                <li>Website Design & Development</li>
+                <li>Landing Pages</li>
+                <li>E-commerce</li>
+                <li>Conversion Optimization</li>
+            </ul>
+        </div>
+        <div class="service-category">
+            <h3><span>📈</span> Performance Marketing</h3>
+            <ul>
+                <li>Paid Ads (Meta, Google, LinkedIn)</li>
+                <li>Lead Generation Funnels</li>
+                <li>Analytics & Reporting</li>
+                <li>Retargeting & CRO</li>
+            </ul>
+        </div>
+    </div>
+    <section id="success-stories" class="success-stories">
+        <h2>Our Success Stories</h2>
+        <div class="case-study">
+            <div class="case-study-card">
+                <h3>Oliyo: Sustainable Personal Care</h3>
+                <p><strong>Challenge:</strong> Launching a sustainable personal care brand in a crowded market.</p>
+                <p><strong>Approach:</strong> Full branding, e-commerce setup, and influencer-led launch campaign.</p>
+                <p><strong>Result:</strong> 5x return on ad spend within the first 60 days.</p>
+            </div>
+        </div>
+        <div class="testimonials">
+            <div class="testimonial-card">
+                <h3>What Our Clients Say</h3>
+                <blockquote>“The Brand Marketers didn’t just deliver great marketing—they helped shape our brand. Their strategy, creativity, and dedication made them feel like an extension of our own team.”</blockquote>
+                <cite>— Anjali R., Founder, Oliyo</cite>
+            </div>
+            <div class="testimonial-card">
+                <h3>Client Feedback</h3>
+                <blockquote>“From social media to PPC, they nailed every campaign. We've seen measurable growth quarter after quarter.”</blockquote>
+                <cite>— Ravi T., CMO, TechNest</cite>
+            </div>
+        </div>
+    </section>
+    <div class="logo-slider">
+        <h2>Our Clients</h2>
+        <div class="logo-track">
+            <img src="rapido.png" alt="Client Logo 1" loading="lazy">
+            <img src="slam-fitness-gym.png" alt="Client Logo 2" loading="lazy">
+            <img src="abi-estate.png" alt="Client Logo 3" loading="lazy">
+            <img src="bisleri.png" alt="Client Logo 4" loading="lazy">
+            <img src="apollo-tyres.png" alt="Client Logo 5" loading="lazy">
+            <img src="adityaram-properties.png" alt="Client Logo 6" loading="lazy">
+            <img src="ars-tmt-bar.png" alt="Client Logo 7" loading="lazy">
+            <img src="barbeque-nation.png" alt="Client Logo 8" loading="lazy">
+            <img src="be-well-hospitals.png" alt="Client Logo 9" loading="lazy">
+            <img src="Bharathi-homes.png" alt="Client Logo 10" loading="lazy">
+            <img src="casagrand-international-school.png" alt="Client Logo 11" loading="lazy">
+            <img src="Casagrand-homes.png" alt="Client Logo 12" loading="lazy">
+            <img src="central-bank-of-india.png" alt="Client Logo 13" loading="lazy">
+            <img src="cri-pumps.png" alt="Client Logo 14" loading="lazy">
+            <img src="doves-vacation.png" alt="Client Logo 15" loading="lazy">
+            <img src="euro-kids.png" alt="Client Logo 16" loading="lazy">
+            <img src="green-trends.png" alt="Client Logo 17" loading="lazy">
+            <img src="Gsquare.png" alt="Client Logo 18" loading="lazy">
+            <img src="jain-housing-and-constructions-ltd.png" alt="Client Logo 19" loading="lazy">
+            <img src="kg-developers-and-promoters.png" alt="Client Logo 20" loading="lazy">
+            <img src="lifeline-hospital.png" alt="Client Logo 21" loading="lazy">
+            <img src="marutham-group.png" alt="Client Logo 22" loading="lazy">
+            <img src="meenakshi-steel.png" alt="Client Logo 23" loading="lazy">
+            <img src="milkymist.png" alt="Client Logo 24" loading="lazy">
+            <img src="mm-foam.png" alt="Client Logo 25" loading="lazy">
+            <img src="mp-developers.png" alt="Client Logo 26" loading="lazy">
+            <img src="mrmed.png" alt="Client Logo 27" loading="lazy">
+            <img src="muthoot-finance.png" alt="Client Logo 28" loading="lazy">
+            <img src="naturals.png" alt="Client Logo 29" loading="lazy">
+            <img src="sangeetha-mobiles.png" alt="Client Logo 30" loading="lazy">
+            <img src="shriram-properties.png" alt="Client Logo 31" loading="lazy">
+            <!-- <img src="signboard.jpg" alt="Client Logo 32" loading="lazy"> -->
+            <img src="skale-fitness.png" alt="Client Logo 1" loading="lazy">
+            <img src="soundarapandian-hospital.png" alt="Client Logo 2" loading="lazy">
+            <img src="suryadev-tmt.png" alt="Client Logo 3" loading="lazy">
+            <img src="toni-and-guy.png" alt="Client Logo 4" loading="lazy">
+            <img src="universal-kingdom.png" alt="Client Logo 5" loading="lazy">
+            <img src="vestar-air-conditionar.png" alt="Client Logo 6" loading="lazy">
+            <img src="vgp-marine-kigdom.png" alt="Client Logo 7" loading="lazy">
+            <img src="vivo.png" alt="Client Logo 8" loading="lazy">
+            <!-- <img src="vivo.png" alt="Client Logo 1" loading="lazy"> -->
+            <img src="rapido.png" alt="Client Logo 1" loading="lazy">
+            <img src="slam-fitness-gym.png" alt="Client Logo 2" loading="lazy">
+            <img src="abi-estate.png" alt="Client Logo 3" loading="lazy">
+            <img src="bisleri.png" alt="Client Logo 4" loading="lazy">
+            <img src="apollo-tyres.png" alt="Client Logo 5" loading="lazy">
+            <img src="adityaram-properties.png" alt="Client Logo 6" loading="lazy">
+            <img src="ars-tmt-bar.png" alt="Client Logo 7" loading="lazy">
+            <img src="barbeque-nation.png" alt="Client Logo 8" loading="lazy">
+            <img src="be-well-hospitals.png" alt="Client Logo 9" loading="lazy">
+            <img src="Bharathi-homes.png" alt="Client Logo 10" loading="lazy">
+            <img src="casagrand-international-school.png" alt="Client Logo 11" loading="lazy">
+            <img src="Casagrand-homes.png" alt="Client Logo 12" loading="lazy">
+            <img src="central-bank-of-india.png" alt="Client Logo 13" loading="lazy">
+            <img src="cri-pumps.png" alt="Client Logo 14" loading="lazy">
+            <img src="doves-vacation.png" alt="Client Logo 15" loading="lazy">
+            <img src="euro-kids.png" alt="Client Logo 16" loading="lazy">
+            <img src="green-trends.png" alt="Client Logo 17" loading="lazy">
+            <img src="Gsquare.png" alt="Client Logo 18" loading="lazy">
+            <img src="jain-housing-and-constructions-ltd.png" alt="Client Logo 19" loading="lazy">
+            <img src="kg-developers-and-promoters.png" alt="Client Logo 20" loading="lazy">
+            <img src="lifeline-hospital.png" alt="Client Logo 21" loading="lazy">
+            <img src="marutham-group.png" alt="Client Logo 22" loading="lazy">
+            <img src="meenakshi-steel.png" alt="Client Logo 23" loading="lazy">
+            <img src="milkymist.png" alt="Client Logo 24" loading="lazy">
+            <img src="mm-foam.png" alt="Client Logo 25" loading="lazy">
+            <img src="mp-developers.png" alt="Client Logo 26" loading="lazy">
+            <img src="mrmed.png" alt="Client Logo 27" loading="lazy">
+            <img src="muthoot-finance.png" alt="Client Logo 28" loading="lazy">
+            <img src="naturals.png" alt="Client Logo 29" loading="lazy">
+            <img src="sangeetha-mobiles.png" alt="Client Logo 30" loading="lazy">
+            <img src="shriram-properties.png" alt="Client Logo 31" loading="lazy">
+            <!-- <img src="signboard.jpg" alt="Client Logo 32" loading="lazy"> -->
+            <img src="skale-fitness.png" alt="Client Logo 1" loading="lazy">
+            <img src="soundarapandian-hospital.png" alt="Client Logo 2" loading="lazy">
+            <img src="suryadev-tmt.png" alt="Client Logo 3" loading="lazy">
+            <img src="toni-and-guy.png" alt="Client Logo 4" loading="lazy">
+            <img src="universal-kingdom.png" alt="Client Logo 5" loading="lazy">
+            <img src="vestar-air-conditionar.png" alt="Client Logo 6" loading="lazy">
+            <img src="vgp-marine-kigdom.png" alt="Client Logo 7" loading="lazy">
+            <img src="vivo.png" alt="Client Logo 8" loading="lazy">
+            <!-- <img src="vivo.png" alt="Client Logo 1" loading="lazy"> -->
+        </div>
+    </div>
+    <footer id="contact">
+        <div class="call-to-action">
+            <div class="cta-text">
+                <span>ARE</span> <span>YOU</span> <span>READY</span> <span>TO</span> <span>WORK</span> <span>WITH</span> <span class="cta-us">US (Discover More)</span>
+            </div>
+            <form class="contact-form" action="#">
+                <div class="form-wrapper">
+                    <label for="name">Your Name</label>
+                    <input id="name" type="text" placeholder="Your Name" required aria-label="Your Name">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" placeholder="Your Message" rows="6" required aria-label="Your Message"></textarea>
+                    <label for="email">Your Email</label>
+                    <input id="email" type="email" placeholder="Your Email" required aria-label="Your Email">
+                    <button type="submit">Send Message</button>
+                    <button type="button" class="close-form" tabindex="0">Close</button>
+                </div>
+            </form>
+        </div>
+        <p>&copy; 2025 Brand Marketers. All rights reserved.</p>
+    </footer>
+    <div class="fire-cursor" aria-hidden="true"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = {
+                hamburger: document.querySelector('.hamburger'),
+                navLinks: document.querySelector('.nav-links'),
+                ctaUs: document.querySelector('.cta-us'),
+                contactForm: document.querySelector('.contact-form'),
+                closeForm: document.querySelector('.close-form'),
+                ctaText: document.querySelector('.cta-text'),
+                fireCursor: document.querySelector('.fire-cursor'),
+                dynamicSpan: document.querySelector('.dynamic-text .dynamic'),
+            };
+
+            if (Object.values(elements).some(el => !el)) {
+                console.error('One or more required elements are missing from the DOM');
+                return;
+            }
+
+            elements.hamburger.addEventListener('click', () => {
+                const isExpanded = elements.navLinks.classList.toggle('active');
+                elements.hamburger.setAttribute('aria-expanded', isExpanded);
+            });
+            elements.navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    elements.navLinks.classList.remove('active');
+                    elements.hamburger.setAttribute('aria-expanded', false);
+                });
+            });
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 786) {
+                    elements.navLinks.classList.remove('active');
+                    elements.hamburger.style.display = 'none';
+                    elements.hamburger.setAttribute('aria-expanded', false);
+                } else {
+                    elements.hamburger.style.display = 'block';
+                }
+            });
+            window.addEventListener('load', () => {
+                if (window.innerWidth > 786) {
+                    elements.navLinks.classList.remove('active');
+                    elements.hamburger.style.display = 'none';
+                    elements.hamburger.setAttribute('aria-expanded', false);
+                } else {
+                    elements.hamburger.style.display = 'block';
+                }
+            });
+
+            elements.ctaUs.addEventListener('click', () => {
+                elements.ctaText.style.display = 'none';
+                elements.contactForm.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            elements.closeForm.addEventListener('click', () => {
+                elements.contactForm.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                setTimeout(() => {
+                    elements.ctaText.style.display = 'inline-block';
+                }, 600);
+            });
+            elements.closeForm.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    elements.contactForm.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    setTimeout(() => {
+                        elements.ctaText.style.display = 'inline-block';
+                    }, 600);
+                }
+            });
+
+            elements.contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = elements.contactForm.querySelector('#name').value;
+                const email = elements.contactForm.querySelector('#email').value;
+                const message = elements.contactForm.querySelector('#message').value;
+
+                if (name && email && message) {
+                    console.log('Form submitted:', { name, email, message });
+                    elements.contactForm.classList.remove('active');
+                    elements.ctaText.style.display = 'inline-block';
+                    document.body.style.overflow = 'auto';
+                } else {
+                    alert('Please fill out all fields.');
+                }
+            });
+
+            const observerOptions = { threshold: 0.1 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.banner, .services, .who-we-are, .about, .what-we-do-heading, .new-what-we-do, .what-we-are, .success-stories, .logo-slider, footer')
+                .forEach(section => observer.observe(section));
+
+            const words = ["makers", "builders", "shapers", "thinkers", "developers", "strategists", "architects", "innovators", "creators", "visionaries"];
+            let index = 0;
+            setInterval(() => {
+                index = (index + 1) % words.length;
+                elements.dynamicSpan.textContent = words[index];
+            }, 900);
+
+            const maxParticles = 10;
+            const particleQueue = [];
+            const particleInterval = 50;
+
+            function createTrailParticle(x, y) {
+                const particle = document.createElement('div');
+                particle.className = 'trail-particle';
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                document.body.appendChild(particle);
+
+                particle.addEventListener('animationend', (e) => {
+                    if (e.animationName === 'trailFade') {
+                        particle.remove();
+                        const index = particleQueue.indexOf(particle);
+                        if (index !== -1) particleQueue.splice(index, 1);
+                    }
+                });
+
+                particleQueue.push(particle);
+                if (particleQueue.length > maxParticles) {
+                    const oldestParticle = particleQueue.shift();
+                    oldestParticle.remove();
+                }
+            }
+
+            let lastParticleTime = 0;
+            document.addEventListener('mousemove', (e) => {
+                const now = performance.now();
+                if (now - lastParticleTime > particleInterval) {
+                    createTrailParticle(e.clientX, e.clientY);
+                    lastParticleTime = now;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

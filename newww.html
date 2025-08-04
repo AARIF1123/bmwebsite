@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="testimonials">
+    <div class="testimonial-track">
+        <div class="testimonial-card">
+            <h3>Client Feedback</h3>
+            <blockquote>“BrandMarketers played a pivotal role in elevating our brand presence...”</blockquote>
+            <cite>— Vivo Marketing Team</cite>
+        </div>
+        <!-- More testimonial cards... -->
+        <!-- Duplicated cards for seamless scrolling -->
+    </div>
+</div>
+<style>
+    .testimonials {
+    overflow: hidden;
+    position: relative;
+}
+.testimonial-track {
+    display: flex;
+    width: max-content;
+    animation: scrollTestimonials 60s linear infinite;
+}
+.testimonial-track:hover {
+    animation-play-state: paused;
+}
+.testimonial-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    width: 350px;
+    margin: 0 10px;
+    flex-shrink: 0;
+    box-shadow: var(--shadow);
+    text-align: left;
+}
+.testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.testimonial-card h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+.testimonial-card blockquote {
+    font-style: italic;
+    position: relative;
+    padding-left: 20px;
+    border-left: 4px solid var(--accent-color);
+}
+.testimonial-card cite {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-style: normal;
+}
+@keyframes scrollTestimonials {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+@media screen and (max-width: 786px) {
+    .testimonials {
+        overflow: visible;
+    }
+    .testimonial-track {
+        animation: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .testimonial-card {
+        margin: 10px 0;
+        width: 100%;
+    }
+}
+</style>
+</body>
+</html>
